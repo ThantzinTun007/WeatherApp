@@ -1,0 +1,49 @@
+<div class="contain mt-5 p-5">
+  <form [formGroup]="searchForm" (ngSubmit)="submitForm()">
+    <div class="row">
+      <div class="mb-9 col-lg-10">
+        <input
+          type="test"
+          class="form-control"
+          formControlName="cityname"
+          placeholder="Search cityname ..."
+        />
+      </div>
+      <div class="col-lg-2">
+        <button class="btn btn-outline-primary">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="searchResult">
+
+    <!-- <h2>{{searchResult.name}}</h2>
+    <h3>{{searchResult.main.temp}}</h3> -->
+
+      <div class="mycontainer mt-5">
+        <div class="card text-black bg mb-5 " style="width: 30%">
+          <div class="card-header text-center">
+            <h2>
+              {{searchResult.name}}
+            </h2>
+            <div>
+              <img src="{{iconURL}}" alt="weather image">
+            </div>
+            <p>
+
+            </p>
+          </div>
+          <div class="card-body text-center">
+            <p>Summary: {{searchResult.weather[0].main}}</p>
+            <p>Temperature: {{searchResult.main.temp}} °F</p>
+            <p>Feels like: {{searchResult.main.feels_like}} °F</p>
+            <p>Humidity: {{searchResult.main.humidity}} %</p>
+            <p>Pressure: {{searchResult.main.pressure}} hPa</p>
+            
+          </div>
+        </div>
+      </div>
+
+  </div>
+
+</div>
