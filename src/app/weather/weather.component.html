@@ -1,49 +1,62 @@
-<div class="contain mt-5 p-5">
-  <form [formGroup]="searchForm" (ngSubmit)="submitForm()">
-    <div class="row">
-      <div class="mb-9 col-lg-10">
+<div class="weather-app-wrapper">
+  <!-- Header / Title -->
+  <div class="app-header">
+    <h1 class="main-title">Aura <span class="highlight">Weather</span></h1>
+    <p class="subtitle">Real-time forecasts with premium precision.</p>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-container">
+    <form class="glass-search-box" [formGroup]="searchForm" (ngSubmit)="submitForm()">
+      <div class="input-wrapper">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
         <input
-          type="test"
-          class="form-control"
+          type="text"
+          class="glass-input"
           formControlName="cityname"
-          placeholder="Search cityname ..."
+          placeholder="Enter city name..."
         />
       </div>
-      <div class="col-lg-2">
-        <button class="btn btn-outline-primary">Search</button>
-      </div>
-    </div>
-  </form>
+      <button class="glass-button" type="submit">Search</button>
+    </form>
+  </div>
 
-  <div *ngIf="searchResult">
-
-    <!-- <h2>{{searchResult.name}}</h2>
-    <h3>{{searchResult.main.temp}}</h3> -->
-
-      <div class="mycontainer mt-5">
-        <div class="card text-black bg mb-5 " style="width: 30%">
-          <div class="card-header text-center">
-            <h2>
-              {{searchResult.name}}
-            </h2>
-            <div>
-              <img src="{{iconURL}}" alt="weather image">
-            </div>
-            <p>
-
-            </p>
-          </div>
-          <div class="card-body text-center">
-            <p>Summary: {{searchResult.weather[0].main}}</p>
-            <p>Temperature: {{searchResult.main.temp}} °F</p>
-            <p>Feels like: {{searchResult.main.feels_like}} °F</p>
-            <p>Humidity: {{searchResult.main.humidity}} %</p>
-            <p>Pressure: {{searchResult.main.pressure}} hPa</p>
-            
-          </div>
+  <!-- Weather Display Section -->
+  <div class="weather-results" *ngIf="searchResult">
+    
+    <div class="glass-card hero-card">
+      <div class="hero-top">
+        <div class="location-info">
+          <h2>{{searchResult.name}}</h2>
+          <span class="weather-desc">{{searchResult.weather[0].main}}</span>
+        </div>
+        <div class="weather-icon-wrapper">
+          <img [src]="iconURL" alt="weather icon" class="weather-icon">
         </div>
       </div>
 
-  </div>
+      <div class="hero-main">
+        <h1 class="temperature">{{ searchResult.main.temp | number:'1.0-0' }}°</h1>
+      </div>
 
+      <div class="weather-details-grid">
+        <div class="detail-item">
+          <span class="detail-label">Feels Like</span>
+          <span class="detail-value">{{ searchResult.main.feels_like | number:'1.0-0' }}°</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Humidity</span>
+          <span class="detail-value">{{searchResult.main.humidity}}%</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Pressure</span>
+          <span class="detail-value">{{searchResult.main.pressure}} hPa</span>
+        </div>
+      </div>
+    </div>
+    
+  </div>
 </div>
